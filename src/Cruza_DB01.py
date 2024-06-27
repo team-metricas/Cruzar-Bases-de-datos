@@ -35,7 +35,7 @@ join_df = join_df.drop(columns=['_merge', 'nro_doc'])
 #no_join_df = no_join_df.drop(columns=['_merge', 'nro_doc'])
 
 # Exporto el DataFrame de las filas que SI hicieron join a un CSV
-archivo_salida_join = "Cruzados_ok.csv"
+archivo_salida_join = "../Cruzados_ok.csv"
 join_df.to_csv(archivo_salida_join, index=False, encoding='utf-8-sig', sep=';')
 
 # Exporto el DataFrame de las filas que NO hicieron join a un CSV
