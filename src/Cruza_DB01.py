@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from pandas.tseries.offsets import DateOffset
 #import sys
 
 # Cambio al directorio de datos
@@ -33,6 +34,12 @@ no_join_df = merged_df[merged_df['_merge'] == 'left_only']
 # Elimino las columnas _merge y nro_doc resultantes del merge, ya no me sirve de nada
 join_df = join_df.drop(columns=['_merge', 'nro_doc'])
 #no_join_df = no_join_df.drop(columns=['_merge', 'nro_doc'])
+
+# Paso a formato date el campo fec_vencimiento
+join_df['fec_vencimiento'] = pd.to_datetime(join_df['fec_vencimiento'])
+
+# Le sumo 1 año a la fecha de vencimiento y la pongo en una columna nueva
+join_df['Nueva_fec_vencimiento'] = join_df['fec_vencimiento'] + DateOffset(years=1)
 
 # Exporto el DataFrame de las filas que SI hicieron join a un CSV
 archivo_salida_join = "../Cruzados_ok.csv"
